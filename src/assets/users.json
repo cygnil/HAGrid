@@ -1,0 +1,5 @@
+[
+    {"userId": "alice", "name": "Alice", "age": 30, "city": "New York", "avatarUri": "https://octodex.github.com/images/original.png"},
+    {"userId": "robert", "name": "Bob", "age": 25, "city": "Los Angeles", "avatarUri": "https://octodex.github.com/images/trekkie.png"},
+    {"userId": "christy", "name": "Christy", "age": 35, "city": "Chicago", "avatarUri": "https://octodex.github.com/images/ironcat.jpg"}
+]

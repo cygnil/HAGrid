@@ -1,0 +1,22 @@
+[
+    {
+        "id": "id",
+        "type": "number",
+        "title": "ID"
+    },
+    {
+        "id": "codeName",
+        "type": "string",
+        "title": "Code Name"
+    },
+    {
+        "id": "profile",
+        "type": "uri",
+        "title": "Profile"
+    },
+    {
+        "id": "users",
+        "type": "users",
+        "title": "Users"
+    }
+]
