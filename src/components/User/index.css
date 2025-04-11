@@ -2,3 +2,12 @@ img {
     width: 36px;
     height: 36px;
 }
+
+.user {
+    display: inline-flex;
+    align-items: center;
+
+    &:not(:first-child) {
+        margin-left: 1rem;
+    }
+}

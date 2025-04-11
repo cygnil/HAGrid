@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import {iCell} from '../interfaces';
+import {iCheckboxCell} from './interfaces';
 
-export function CheckboxCell(props: iCell) {
+export function CheckboxCell(props: iCheckboxCell) {
 
     // Define a checkbox state, then add an effect for updating the main grid state of selected rows. Inefficient, this will be improved later.
     const [isChecked, setisChecked] = useState<boolean>(!!props.value);

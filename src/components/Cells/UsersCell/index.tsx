@@ -1,10 +1,10 @@
-import {iCell} from '../interfaces';
+import {iUsersCell} from './interfaces';
 import {User} from '../../User';
 // TODO: Break users out into more effcient access method. Maybe redux?
 import users from '../../../assets/users.json';
 import {iUser} from '../../User/interfaces';
 
-export function UsersCell(props: iCell) {
+export function UsersCell(props: iUsersCell) {
 
     // This really pains me to write, it's so inefficient. But we'll improve it later, for now let's use it to just move on with development
     // Using a Map because it plays better with TypeScript; defining an entire interface is too heavyweight for this

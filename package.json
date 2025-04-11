@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-tooltip": "^5.28.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@storybook/addon-actions": "^8.6.12",
+    "@storybook/addon-essentials": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
