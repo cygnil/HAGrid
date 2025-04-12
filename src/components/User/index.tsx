@@ -1,4 +1,4 @@
-import {Avatar} from '../Avatar';
+import {Avatar} from '@mui/material';
 import './index.css';
 import {iUser} from './interfaces';
 
@@ -6,7 +6,7 @@ import {iUser} from './interfaces';
 export function User(props: iUser) {
     return (
         <span className="user">
-            <Avatar imageUri={props.avatarUri} name={props.name} />
+            <Avatar src={props.avatarUri} alt={props.name} />
             <span className="user-name">{props.name}</span>
         </span>
     )

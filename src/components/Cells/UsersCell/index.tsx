@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {Tooltip} from 'react-tooltip';
+import {Chip} from '@mui/material';
 import {iUsersCell} from './interfaces';
 import {User} from '../../User';
 import {UserEditor} from '../../UserEditor';
@@ -35,7 +36,7 @@ export function UsersCell(props: iUsersCell) {
             <User {...(userMap.get(value[0]) || nullUser)} />
             {value.length > 1 &&
                 <>
-                    <span className="users-show-more" data-tooltip-id="show-users">+{value.length - 1}</span>
+                    <Chip className="users-show-more" data-tooltip-id="show-users" label={"+" + (value.length - 1)} />
                     <Tooltip id="show-users" place="top" className="tooltip" variant="info">
                         {value.slice(1).map((userId: string) => {
                             const user = userMap.get(userId) || nullUser;

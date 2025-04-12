@@ -1,6 +1,6 @@
 import {useState} from "react";
 import natsort from "natsort";
-import {Avatar} from "../Avatar";
+import {Avatar} from "@mui/material";
 import {User} from "../User";
 import {iUser} from "../User/interfaces";
 import {iUserEditor} from "./interfaces";
@@ -26,13 +26,15 @@ export function UserEditor(props: iUserEditor) {
     const handleAddUser = (userId: string) => {
         const newValue = [...selectedUsers, userId]
         setSelectedUsers(newValue);
-        onUpdate(newValue, onUpdateFinished);
+        onUpdate(newValue);
+        onUpdateFinished();
     }
 
     const handleRemoveUser = (userId: string) => {
         const newValue = selectedUsers.filter((id: string) => id !== userId)
         setSelectedUsers(newValue);
-        onUpdate(newValue, onUpdateFinished);
+        onUpdate(newValue);
+        onUpdateFinished();
     }
 
     return (
@@ -43,7 +45,7 @@ export function UserEditor(props: iUserEditor) {
                         const user = userMap.get(userId) || {userId: '', name: '', avatarUri: ''};
                         return (
                             <span key={user.userId} className="user-editor-user" onClick={handleRemoveUser.bind(null, user.userId)}>
-                                <Avatar imageUri={user.avatarUri} name={user.name} />
+                                <Avatar src={user.avatarUri} alt={user.name} />
                             </span>
                         );
                     })}
