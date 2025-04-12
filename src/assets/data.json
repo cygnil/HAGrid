@@ -1,4 +1,4 @@
 [
-    {"id": 11, "codeName": "007", "profile": "http://example.com", "users": ["alice", "robert"]},
+    {"id": 11, "codeName": "007", "profile": "http://example.com", "users": ["alice", "bob"]},
     {"id": 222, "codeName": "Goliath", "profile": "https://linkedin.com", "users": ["christy"]}
 ]

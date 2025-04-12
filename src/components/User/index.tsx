@@ -1,3 +1,4 @@
+import {Avatar} from '../Avatar';
 import './index.css';
 import {iUser} from './interfaces';
 
@@ -5,7 +6,7 @@ import {iUser} from './interfaces';
 export function User(props: iUser) {
     return (
         <span className="user">
-            <img src={props.avatarUri} alt={props.name} className="user-avatar" />
+            <Avatar imageUri={props.avatarUri} name={props.name} />
             <span className="user-name">{props.name}</span>
         </span>
     )
