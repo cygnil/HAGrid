@@ -17,6 +17,7 @@
     {
         "id": "users",
         "type": "users",
-        "title": "Users"
+        "title": "Users",
+        "editable": true
     }
 ]

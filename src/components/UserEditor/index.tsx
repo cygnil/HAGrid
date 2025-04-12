@@ -7,7 +7,8 @@ import {iUserEditor} from "./interfaces";
 import users from "../../assets/users.json";
 
 export function UserEditor(props: iUserEditor) {
-    const [selectedUsers, setSelectedUsers] = useState<string[]>(props.value);
+    const {value, onUpdate, onUpdateFinished} = props;
+    const [selectedUsers, setSelectedUsers] = useState<string[]>(value);
     const [userFilter, setUserFilter] = useState<string>("");
     const sorter = natsort({desc: false, insensitive: true});
 
@@ -22,6 +23,18 @@ export function UserEditor(props: iUserEditor) {
         setUserFilter(newValue);
     };
 
+    const handleAddUser = (userId: string) => {
+        const newValue = [...selectedUsers, userId]
+        setSelectedUsers(newValue);
+        onUpdate(newValue, onUpdateFinished);
+    }
+
+    const handleRemoveUser = (userId: string) => {
+        const newValue = selectedUsers.filter((id: string) => id !== userId)
+        setSelectedUsers(newValue);
+        onUpdate(newValue, onUpdateFinished);
+    }
+
     return (
         <>
             <div className="user-editor">
@@ -29,7 +42,7 @@ export function UserEditor(props: iUserEditor) {
                     {selectedUsers.map((userId: string) => {
                         const user = userMap.get(userId) || {userId: '', name: '', avatarUri: ''};
                         return (
-                            <span key={user.userId} className="user-editor-user" onClick={() => setSelectedUsers(selectedUsers.filter((id: string) => id !== user.userId))}>
+                            <span key={user.userId} className="user-editor-user" onClick={handleRemoveUser.bind(null, user.userId)}>
                                 <Avatar imageUri={user.avatarUri} name={user.name} />
                             </span>
                         );
@@ -44,7 +57,7 @@ export function UserEditor(props: iUserEditor) {
                         .sort((a, b) => sorter(a.name, b.name))
                         .map((user: iUser) => {
                             return (
-                                <span key={user.userId} className="user-editor-user" onClick={() => setSelectedUsers([...selectedUsers, user.userId])}>
+                                <span key={user.userId} className="user-editor-user" onClick={handleAddUser.bind(null, user.userId)}>
                                     <User {...user} />
                                 </span>
                             );

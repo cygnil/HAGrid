@@ -17,7 +17,8 @@ export function SimpleEditor(props: iSimpleEditor) {
     // Handle blur event and update if input is valid or no validator function is provided
     const handleBlur = () => {
         if (!validate || validate(inputValue)) {
-            onUpdate(inputValue, onUpdateFinished);
+            onUpdate(inputValue);
+            onUpdateFinished();
         }
     };
 

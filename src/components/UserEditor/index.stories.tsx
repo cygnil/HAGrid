@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import {UserEditor} from './index';
+import {action} from '@storybook/addon-actions';
 
 const meta = {
   component: UserEditor,
@@ -13,6 +14,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: ["alice", "bob"]
+    value: ["alice", "bob"],
+    onUpdate: action('onUpdate'),
+    onUpdateFinished: action('onUpdateFinished')
   },
 };

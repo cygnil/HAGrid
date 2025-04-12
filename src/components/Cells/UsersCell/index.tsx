@@ -8,6 +8,7 @@ import users from '../../../assets/users.json';
 import {iUser} from '../../User/interfaces';
 
 export function UsersCell(props: iUsersCell) {
+    const [value, setValue] = useState(props.value);
     const [isEditing, setIsEditing] = useState(false);
 
     // This really pains me to write, it's so inefficient. But we'll improve it later, for now let's use it to just move on with development
@@ -21,16 +22,22 @@ export function UsersCell(props: iUsersCell) {
     // TODO: Clean this up
     const nullUser = {userId: '', name: '', avatarUri: ''};
 
-    const editButton = <button className="edit-button" onClick={() => {setIsEditing(true)}}>Edit</button>
+    const editButton = <button className="edit-button" onClick={() => {setIsEditing(!isEditing)}}>Edit</button>
+
+    const onUpdate = async (val: string[]) => {
+        setValue(val);
+        return true;
+    };
+    const onUpdateFinished = () => {return null};
 
     return (
         <div className="users-cell">
-            <User {...(userMap.get(props.value[0]) || nullUser)} />
-            {props.value.length > 1 &&
+            <User {...(userMap.get(value[0]) || nullUser)} />
+            {value.length > 1 &&
                 <>
-                    <span className="users-show-more" data-tooltip-id="show-users">+{props.value.length - 1}</span>
+                    <span className="users-show-more" data-tooltip-id="show-users">+{value.length - 1}</span>
                     <Tooltip id="show-users" place="top" className="tooltip" variant="info">
-                        {props.value.slice(1).map((userId: string) => {
+                        {value.slice(1).map((userId: string) => {
                             const user = userMap.get(userId) || nullUser;
                             return <User key={user.userId} {...user} />;
                         })}
@@ -38,7 +45,7 @@ export function UsersCell(props: iUsersCell) {
                 </>
             }
             {props.editable && editButton}
-            {isEditing && <UserEditor value={props.value} />}
+            {isEditing && <UserEditor value={value} onUpdate={onUpdate} onUpdateFinished={onUpdateFinished} />}
         </div>
     );
 }

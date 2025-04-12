@@ -1,7 +1,7 @@
-import { HeaderCell } from '../HeaderCell';
-import { Cell } from '../Cells';
-import { iGrid } from './interfaces'
-import { useState } from 'react';
+import {HeaderCell} from '../Cells/HeaderCell';
+import {Cell} from '../Cells';
+import {iGrid} from './interfaces'
+import {useState} from 'react';
 import './index.css';
 
 // The main grid component. Extensible cells are contained in ../Cells, and there's a lot of grid functionality not present (such as
@@ -9,14 +9,21 @@ import './index.css';
 export function Grid(props: iGrid) {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   // TODO: make sure defined columns do not include __select__
-  // TODO: select-all in header
+
+  const onSelectAll = (val: boolean) => {
+    if (val) {
+      setSelectedIds(props.data.map((rowData) => rowData.id));
+    } else {
+      setSelectedIds([]);
+    }
+  }
 
   return (
     <>
       <table>
         <thead>
           <tr>
-            <HeaderCell title='' id='__select__' />
+            <Cell type="checkbox" columnId="__select__" value={false} opts={{onUpdate: onSelectAll}} />
             {
               props.definition.map((header) => {
                 return (
@@ -42,7 +49,7 @@ export function Grid(props: iGrid) {
                     <Cell type='checkbox' value={false} columnId='__select__' opts={{onUpdate: onSelectUpdate}} />
                     {
                     props.definition.map((colData) => {
-                      return <Cell value={rowData[colData.id]} columnId={colData.id} type={colData.type} opts={colData.opts || {}} />
+                      return <Cell key={colData.id + rowData.id} value={rowData[colData.id]} columnId={colData.id} type={colData.type} editable={colData.editable} opts={colData.opts || {}} />
                     })
                   }
                 </tr>
