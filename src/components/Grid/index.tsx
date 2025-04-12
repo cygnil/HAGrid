@@ -16,6 +16,7 @@ export function Grid(props: iGrid) {
     } else {
       setSelectedIds([]);
     }
+    // TODO: Update the selected state of all rows in the grid
   }
 
   return (

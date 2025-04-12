@@ -28,11 +28,11 @@ export const MultipleUsers: Story = {
 };
 
 export const Editable: Story = {
-    args: {
-      value: ["alice", "bob"],
-      columnId: "foo",
-      type: "users",
-      editable: true
-    }
-  };
+  args: {
+    value: ["alice", "bob"],
+    columnId: "foo",
+    type: "users",
+    editable: true
+  }
+};
   

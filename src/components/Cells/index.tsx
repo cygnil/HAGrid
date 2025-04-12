@@ -1,7 +1,8 @@
 import {NumberCell} from './NumberCell';
+import {StringCell} from './StringCell';
 import {CheckboxCell} from './CheckboxCell';
-import { UriCell } from './UriCell';
-import { UsersCell } from './UsersCell';
+import {UriCell} from './UriCell';
+import {UsersCell} from './UsersCell';
 import {iCell} from './interfaces';
 
 // Umbrella cell for determining what cell type we actually render
@@ -24,8 +25,9 @@ export function Cell(props: iCell) {
         case 'users':
             renderedValue = <UsersCell {...props} />;
             break;
+        case 'string':
         default:
-            renderedValue = props.value;
+            renderedValue = <StringCell {...props} />;
             break;
     }
 
