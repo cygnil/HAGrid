@@ -1,16 +1,17 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {Tooltip} from 'react-tooltip';
 import {Chip} from '@mui/material';
 import {iUsersCell} from './interfaces';
 import {User} from '../../User';
 import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
-import users from '../../../assets/users.json';
 import {iUser} from '../../User/interfaces';
+import {UsersContext} from '../../App/App';
 
 export function UsersCell(props: iUsersCell) {
     const [value, setValue] = useState(props.value);
     const [isEditing, setIsEditing] = useState(false);
+    const {users} = useContext(UsersContext);
 
     // This really pains me to write, it's so inefficient. But we'll improve it later, for now let's use it to just move on with development
     // Using a Map because it plays better with TypeScript; defining an entire interface is too heavyweight for this
