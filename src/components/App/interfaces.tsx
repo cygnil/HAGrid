@@ -1,8 +1,19 @@
-import {iUser} from '../User/interfaces';
+export interface iDataRow {
+    id: number; // Unique identifier for the row
+    codeName: string; // A basic string
+    profile: string; // A link for testing link cells
+    users: string[]; // List of user IDs associated with the row
+}
+
+export interface iUser {
+    userId: string;
+    name: string;
+    avatarUri: string;
+};
 
 export interface iDataContext {
-    data: any[]; // The data to be displayed in the grid
-    setData: (data: any[]) => void; // Function to update the data
+    data: iDataRow[]; // The data to be displayed in the grid
+    setData: (data: iDataRow[]) => void; // Function to update the data
 }
 
 export interface iUsersContext {

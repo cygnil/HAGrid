@@ -5,7 +5,7 @@ import {iUsersCell} from './interfaces';
 import {User} from '../../User';
 import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
-import {iUser} from '../../User/interfaces';
+import {iUser} from '../../App/interfaces';
 import {UsersContext} from '../../App/App';
 import config from '../../../config.json';
 import './index.css';

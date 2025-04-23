@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {Grid} from '../Grid';
 import './App.css'
-import {iDataContext, iUsersContext} from './interfaces';
+import {iDataRow, iDataContext, iUser, iUsersContext} from './interfaces';
 import gridDefinition from '../../assets/gridDefinition.json';
+import spinner from '../../assets/spinner.svg';
 import config from '../../config.json';
 
 export const DataContext = React.createContext<iDataContext>({data: [], setData: () => {return}});
@@ -10,8 +11,8 @@ export const UsersContext = React.createContext<iUsersContext>({users: [], setUs
 
 // Plain and simple grid, nothing more. Pass the data, users and definition
 function App() {
-  const [data, setData] = React.useState<iDataContext[]>([]);
-  const [users, setUsers] = React.useState<iUsersContext[]>([]);
+  const [data, setData] = React.useState<iDataRow[]>([]);
+  const [users, setUsers] = React.useState<iUser[]>([]);
 
   useEffect(() => {
     const serverBaseUri = config.server.protocol + "://" + config.server.host + ":" + config.server.port;
@@ -22,7 +23,7 @@ function App() {
         throw new Error("Network response was not ok when fetching data");
       }
 
-      const json: iDataContext[] = await response.json()
+      const json: iDataRow[] = await response.json()
       setData(json);
     }
 
@@ -32,7 +33,7 @@ function App() {
         throw new Error("Network response was not ok when fetching users");
       }
 
-      const json: iUsersContext[] = await response.json()
+      const json: iUser[] = await response.json()
       setUsers(json);
     }
 
@@ -41,10 +42,13 @@ function App() {
   }
   , []);
 
-  // TODO: Add a loading state for when the data is being fetched
+  // TODO: Indicate errors in the loading state instead of relying on the console for info
   const loadingState = (
     <div className="loading-state">
-      <p>Loading...</p>
+      <span className="loading-state-spinner">
+        <img src={spinner} alt="Loading..." />
+      </span>
+      <span>Loading...</span>
     </div>
   );
 

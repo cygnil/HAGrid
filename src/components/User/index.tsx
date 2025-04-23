@@ -1,6 +1,6 @@
 import {Avatar} from '@mui/material';
 import './index.css';
-import {iUser} from './interfaces';
+import {iUser} from '../App/interfaces';
 
 // Render a user entity, including avatar and name
 export function User(props: iUser) {

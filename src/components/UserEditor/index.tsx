@@ -3,7 +3,7 @@ import {Tooltip} from "react-tooltip";
 import natsort from "natsort";
 import {Avatar, List, ListItem} from "@mui/material";
 import {User} from "../User";
-import {iUser} from "../User/interfaces";
+import {iUser} from "../App/interfaces";
 import {iUserEditor} from "./interfaces";
 import users from "../../assets/users.json";
 import "./index.css";
