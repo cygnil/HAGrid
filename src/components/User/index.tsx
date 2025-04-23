@@ -6,7 +6,7 @@ import {iUser} from './interfaces';
 export function User(props: iUser) {
     return (
         <span className="user">
-            <Avatar src={props.avatarUri} alt={props.name} />
+            <Avatar src={props.avatarUri} alt={props.name} sx={{bgcolor: "#e7e7e7"}} />
             <span className="user-name">{props.name}</span>
         </span>
     )

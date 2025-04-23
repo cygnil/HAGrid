@@ -2,9 +2,8 @@ import React, {useEffect} from 'react';
 import {Grid} from '../Grid';
 import './App.css'
 import {iDataContext, iUsersContext} from './interfaces';
-import dataJson from '../../assets/data.json';
-import usersJson from '../../assets/users.json';
 import gridDefinition from '../../assets/gridDefinition.json';
+import config from '../../config.json';
 
 export const DataContext = React.createContext<iDataContext>({data: [], setData: () => {return}});
 export const UsersContext = React.createContext<iUsersContext>({users: [], setUsers: () => {return}});
@@ -14,13 +13,31 @@ function App() {
   const [data, setData] = React.useState<iDataContext[]>([]);
   const [users, setUsers] = React.useState<iUsersContext[]>([]);
 
-  // TODO: Actually load data and users from the server
   useEffect(() => {
-    // Simulate fetching data from a server
-    setTimeout(() => {
-      setData(dataJson);
-      setUsers(usersJson);
-    }, 1000); // Simulate a 1 second delay
+    const serverBaseUri = config.server.protocol + "://" + config.server.host + ":" + config.server.port;
+
+    const fetchData = async () => {
+      const response = await fetch(serverBaseUri + "/data");
+      if (!response.ok) {
+        throw new Error("Network response was not ok when fetching data");
+      }
+
+      const json: iDataContext[] = await response.json()
+      setData(json);
+    }
+
+    const fetchUsers = async () => {
+      const response = await fetch(serverBaseUri + "/users");
+      if (!response.ok) {
+        throw new Error("Network response was not ok when fetching users");
+      }
+
+      const json: iUsersContext[] = await response.json()
+      setUsers(json);
+    }
+
+    fetchData();
+    fetchUsers();
   }
   , []);
 

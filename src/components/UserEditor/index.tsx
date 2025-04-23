@@ -1,10 +1,12 @@
 import {useState} from "react";
+import {Tooltip} from "react-tooltip";
 import natsort from "natsort";
-import {Avatar} from "@mui/material";
+import {Avatar, List, ListItem} from "@mui/material";
 import {User} from "../User";
 import {iUser} from "../User/interfaces";
 import {iUserEditor} from "./interfaces";
 import users from "../../assets/users.json";
+import "./index.css";
 
 export function UserEditor(props: iUserEditor) {
     const {value, onUpdate, onUpdateFinished} = props;
@@ -45,7 +47,8 @@ export function UserEditor(props: iUserEditor) {
                         const user = userMap.get(userId) || {userId: '', name: '', avatarUri: ''};
                         return (
                             <span key={user.userId} className="user-editor-user" onClick={handleRemoveUser.bind(null, user.userId)}>
-                                <Avatar src={user.avatarUri} alt={user.name} />
+                                <Avatar src={user.avatarUri} alt={user.name} data-tooltip-id={"tt-" + user.userId} data-tooltip-content={user.name} />
+                                <Tooltip id={"tt-" + user.userId} place="top" className="tooltip" variant="info" />
                             </span>
                         );
                     })}
@@ -53,18 +56,18 @@ export function UserEditor(props: iUserEditor) {
                 <div className="user-editor-input-box">
                     <input type="text" placeholder="Search for users..." value={userFilter} onChange={handleFilterChange} />
                 </div>
-                <div className="addable-users">
+                <List className="addable-users">
                     {Array.from(userMap.values())
                         .filter((user: iUser) => !selectedUsers.includes(user.userId) && RegExp(userFilter, 'i').test(user.name))
                         .sort((a, b) => sorter(a.name, b.name))
                         .map((user: iUser) => {
                             return (
-                                <span key={user.userId} className="user-editor-user" onClick={handleAddUser.bind(null, user.userId)}>
+                                <ListItem key={user.userId} className="user-editor-user" onClick={handleAddUser.bind(null, user.userId)}>
                                     <User {...user} />
-                                </span>
+                                </ListItem>
                             );
                         })}
-                </div>
+                </List>
             </div>
         </>
     )

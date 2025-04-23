@@ -7,6 +7,7 @@ import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
 import {iUser} from '../../User/interfaces';
 import {UsersContext} from '../../App/App';
+import './index.css';
 
 export function UsersCell(props: iUsersCell) {
     const [value, setValue] = useState(props.value);
