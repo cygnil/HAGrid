@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    dataId: 0,
     value: ["alice"],
     columnId: "foo",
     type: "users",
@@ -21,6 +22,7 @@ export const Default: Story = {
 
 export const MultipleUsers: Story = {
   args: {
+    dataId: 0,
     value: ["alice", "bob", "christy"],
     columnId: "foo",
     type: "users"
@@ -29,6 +31,7 @@ export const MultipleUsers: Story = {
 
 export const Editable: Story = {
   args: {
+    dataId: 0,
     value: ["alice", "bob"],
     columnId: "foo",
     type: "users",

@@ -26,7 +26,7 @@ export function Grid(props: iGrid) {
         <Table className="grid-table" stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <Cell type="checkbox" columnId="__select__" value={false} opts={{onUpdate: onSelectAll}} />
+              <Cell type="checkbox" dataId={-1} columnId="__select__" value={false} opts={{onUpdate: onSelectAll}} />
               {
                 props.definition.map((header) => {
                   return (
@@ -49,10 +49,10 @@ export function Grid(props: iGrid) {
 
                 return (
                   <TableRow key={rowData.id}>
-                      <Cell type='checkbox' value={false} columnId='__select__' opts={{onUpdate: onSelectUpdate}} />
+                      <Cell type='checkbox' dataId={rowData.id} value={false} columnId='__select__' opts={{onUpdate: onSelectUpdate}} />
                       {
                       props.definition.map((colData) => {
-                        return <Cell key={colData.id + rowData.id} value={rowData[colData.id]} columnId={colData.id} type={colData.type} editable={colData.editable} opts={colData.opts || {}} />
+                        return <Cell key={colData.id + rowData.id} dataId={rowData.id} value={rowData[colData.id]} columnId={colData.id} type={colData.type} editable={colData.editable} opts={colData.opts || {}} />
                       })
                     }
                   </TableRow>

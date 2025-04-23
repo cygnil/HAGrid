@@ -17,7 +17,7 @@ function App() {
     const serverBaseUri = config.server.protocol + "://" + config.server.host + ":" + config.server.port;
 
     const fetchData = async () => {
-      const response = await fetch(serverBaseUri + "/data");
+      const response = await fetch(serverBaseUri + "/data", {method: "POST", headers: {"Content-Type": "application/json"}});
       if (!response.ok) {
         throw new Error("Network response was not ok when fetching data");
       }
@@ -27,7 +27,7 @@ function App() {
     }
 
     const fetchUsers = async () => {
-      const response = await fetch(serverBaseUri + "/users");
+      const response = await fetch(serverBaseUri + "/users", {method: "POST", headers: {"Content-Type": "application/json"}});
       if (!response.ok) {
         throw new Error("Network response was not ok when fetching users");
       }

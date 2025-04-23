@@ -7,6 +7,7 @@ import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
 import {iUser} from '../../User/interfaces';
 import {UsersContext} from '../../App/App';
+import config from '../../../config.json';
 import './index.css';
 
 export function UsersCell(props: iUsersCell) {
@@ -27,9 +28,29 @@ export function UsersCell(props: iUsersCell) {
 
     const editButton = <button className="edit-button" onClick={() => {setIsEditing(!isEditing)}}>Edit</button>
 
+    // It's a dilemma whether to put the update function here or somewhere else. In a real application I would opt for keeping
+    // side effects like server updates separate (we'd probably even be using GraphQL!), but for this demo it's easier to keep it here
+    // both for practical concerns and for ease of reference when reviewing the code.
     const onUpdate = async (val: string[]) => {
-        setValue(val);
-        return true;
+        const baseServerUri = config.server.protocol + "://" + config.server.host + ":" + config.server.port;
+        const updateUser = async () => {
+          const response = await fetch(baseServerUri + "/update", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({id: props.dataId, values: [{column: "users", value: val}]}),
+          });
+          if (!response.ok) {
+            throw new Error("Network response was not ok when updating user " + props.dataId);
+          } else {
+            setValue(val);
+          }
+          return response.ok;
+        }
+
+        const success = await updateUser();
+        return success;
     };
     const onUpdateFinished = () => {return null};
 
