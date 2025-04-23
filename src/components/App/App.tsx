@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
+import {LoadingState} from '../LoadingState';
 import {Grid} from '../Grid';
 import './App.css'
 import {iDataRow, iDataContext, iUser, iUsersContext} from './interfaces';
 import gridDefinition from '../../assets/gridDefinition.json';
-import spinner from '../../assets/spinner.svg';
 import config from '../../config.json';
 
 export const DataContext = React.createContext<iDataContext>({data: [], setData: () => {return}});
@@ -42,18 +42,8 @@ function App() {
   }
   , []);
 
-  // TODO: Indicate errors in the loading state instead of relying on the console for info
-  const loadingState = (
-    <div className="loading-state">
-      <span className="loading-state-spinner">
-        <img src={spinner} alt="Loading..." />
-      </span>
-      <span>Loading...</span>
-    </div>
-  );
-
   if (data.length === 0 || users.length === 0) {
-    return loadingState;
+    return (<LoadingState />);
   }
 
   return (
