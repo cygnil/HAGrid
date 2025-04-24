@@ -15,6 +15,7 @@ export const Default: Story = {
   args: {
     value: false,
     columnId: "foo",
+    dataId: 0,
     type: "checkbox",
   },
 };
@@ -23,6 +24,7 @@ export const Prechecked: Story = {
   args: {
     value: true,
     columnId: "foo",
+    dataId: 0,
     type: "checkbox"
   }
 };

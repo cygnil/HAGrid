@@ -3,7 +3,6 @@ import {HeaderCell} from '../Cells/HeaderCell';
 import {Cell} from '../Cells';
 import {iGrid} from './interfaces'
 import {useState} from 'react';
-import './index.css';
 
 // The main grid component. Extensible cells are contained in ../Cells, and there's a lot of grid functionality not present (such as
 // sorting, filtering, and resizing). It will at least allow for selection of rows, although to what end is as-yet TBD

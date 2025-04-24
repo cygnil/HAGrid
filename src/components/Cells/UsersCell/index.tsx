@@ -1,14 +1,14 @@
 import {memo, useState, useContext} from 'react';
-import {Chip, IconButton, Popover, Tooltip} from '@mui/material';
+import {Chip, Popover, Tooltip} from '@mui/material';
 import {TooltipProps, tooltipClasses} from '@mui/material/Tooltip';
 import {styled} from '@mui/material/styles';
-import {Edit} from '@mui/icons-material';
 import {iUsersCell} from './interfaces';
 import User from '../../User';
 import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
 import {iUser} from '../../App/interfaces';
 import {AlertsContext, UsersContext} from '../../App/App';
+import {EditButton} from '../../EditButton';
 import {onUpdateFactory} from '../../../server-effects';
 import './index.css';
 
@@ -56,15 +56,7 @@ export function UsersCell(props: iUsersCell) {
                     </LightTooltip>
                 </>
             }
-            {props.editable && 
-                <>
-                    <Tooltip title="Edit">
-                        <IconButton className="edit-button" size="small" onClick={() => {setIsEditing(!isEditing)}}>
-                            <Edit />
-                        </IconButton>
-                    </Tooltip>
-                </>
-            }
+            {props.editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
             <Popover
                 open={isEditing}
                 anchorEl={document.querySelector('.edit-button')}

@@ -1,9 +1,8 @@
 import {memo, useContext, useState} from 'react';
-import {IconButton, Tooltip} from '@mui/material';
-import {Edit} from '@mui/icons-material';
 import {iUriCell} from './interfaces';
 import {AlertsContext} from '../../App/App';
 import {SimpleEditor} from '../../SimpleEditor';
+import {EditButton} from '../../EditButton';
 import {onUpdateFactory} from '../../../server-effects';
 import './index.css';
 
@@ -22,14 +21,12 @@ export function UriCell(props: iUriCell) {
   }
   const validate = (newValue: string) => {return {isValid: URL.canParse(newValue), message: "Does not pass URL.canParse() check!"}};
 
-  const editButton = <Tooltip title="Edit"><IconButton className="edit-button" size="small" onClick={() => {setIsEditing(!isEditing)}}><Edit /></IconButton></Tooltip>;
-
   return (
     <>
       {!isEditing &&
         <span className={`uri-cell ${props.editable && "editable"}`}>
           <a href={value} {...(opts.newTab ? {target: "_blank", rel: "noopener noreferrer"} : {})}>{value}</a>
-          {editable && editButton}
+          {editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
         </span>
       }
       {isEditing && <SimpleEditor
