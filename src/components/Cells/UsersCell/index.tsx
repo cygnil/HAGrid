@@ -1,10 +1,10 @@
-import {useState, useContext} from 'react';
+import {memo, useState, useContext} from 'react';
 import {Chip, IconButton, Popover, Tooltip} from '@mui/material';
 import {TooltipProps, tooltipClasses} from '@mui/material/Tooltip';
 import {styled} from '@mui/material/styles';
 import {Edit} from '@mui/icons-material';
 import {iUsersCell} from './interfaces';
-import {User} from '../../User';
+import User from '../../User';
 import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
 import {iUser} from '../../App/interfaces';
@@ -85,3 +85,15 @@ export function UsersCell(props: iUsersCell) {
         </div>
     );
 }
+
+const UsersCellMemoized = memo(UsersCell, (prev : iUsersCell, next : iUsersCell) => {
+  // It's more correct to compare the content of the two arrays to see if they're the same (e.g. we shouldn't re-render comparing [1, 2] and [2, 1]), but
+  // that would incur a performance hit that would become almost impossible to deal with using larger data sets or more users
+  if (prev.value.length !== next.value.length || prev.editable !== next.editable) {return false;}
+  for (let i = 0; i < prev.value.length; i++) {
+    if (prev.value[i] !== next.value[i]) {return false};
+  }
+  return true;
+})
+
+export default UsersCellMemoized;

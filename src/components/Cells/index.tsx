@@ -1,9 +1,9 @@
 import {TableCell} from '@mui/material';
-import {NumberCell} from './NumberCell';
-import {StringCell} from './StringCell';
-import {CheckboxCell} from './CheckboxCell';
-import {UriCell} from './UriCell';
-import {UsersCell} from './UsersCell';
+import NumberCell from './NumberCell';
+import StringCell from './StringCell';
+import CheckboxCell from './CheckboxCell';
+import UriCell from './UriCell';
+import UsersCell from './UsersCell';
 import {iCell} from './interfaces';
 
 // Umbrella cell for determining what cell type we actually render

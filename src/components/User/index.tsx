@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {Avatar, Chip} from '@mui/material';
 import './index.css';
 import {iUser} from '../App/interfaces';
@@ -13,3 +14,9 @@ export function User(props: iUser) {
         />
     )
 }
+
+const UserMemoized = memo(User, (prev : iUser, next : iUser) => {
+  return prev.avatarUri === next.avatarUri && prev.name === next.name;
+})
+
+export default UserMemoized;

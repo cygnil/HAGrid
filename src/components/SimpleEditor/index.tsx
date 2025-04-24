@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {TextField} from "@mui/material";
 import {iSimpleEditor} from "./interfaces";
-import './index.css';
 
 export function SimpleEditor(props: iSimpleEditor) {
     const {value, validate, onUpdate, onUpdateFinished} = props;

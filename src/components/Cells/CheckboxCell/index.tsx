@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {memo, useEffect, useState} from 'react'
 import {Checkbox} from '@mui/material';
 import {iCheckboxCell} from './interfaces';
 
@@ -14,3 +14,9 @@ export function CheckboxCell(props: iCheckboxCell) {
     <Checkbox className="checkbox-cell" checked={isChecked} onChange={() => setisChecked(!isChecked)} />
   )
 }
+
+const CheckboxCellMemoized = memo(CheckboxCell, (prev : iCheckboxCell, next : iCheckboxCell) => {
+  return prev.value === next.value && prev.editable === next.editable;
+})
+
+export default CheckboxCellMemoized;

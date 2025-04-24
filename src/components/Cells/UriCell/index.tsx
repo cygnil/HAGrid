@@ -1,10 +1,11 @@
-import {useContext, useState} from 'react';
+import {memo, useContext, useState} from 'react';
 import {IconButton, Tooltip} from '@mui/material';
 import {Edit} from '@mui/icons-material';
 import {iUriCell} from './interfaces';
 import {AlertsContext} from '../../App/App';
 import {SimpleEditor} from '../../SimpleEditor';
 import {onUpdateFactory} from '../../../server-effects';
+import './index.css';
 
 // Render a URI as a link
 export function UriCell(props: iUriCell) {
@@ -26,7 +27,7 @@ export function UriCell(props: iUriCell) {
   return (
     <>
       {!isEditing &&
-        <span className="uri-cell">
+        <span className={`uri-cell ${props.editable && "editable"}`}>
           <a href={value} {...(opts.newTab ? {target: "_blank", rel: "noopener noreferrer"} : {})}>{value}</a>
           {editable && editButton}
         </span>
@@ -40,3 +41,9 @@ export function UriCell(props: iUriCell) {
     </>
   )
 }
+
+const UriCellMemoized = memo(UriCell, (prev : iUriCell, next : iUriCell) => {
+  return prev.value === next.value && prev.editable === next.editable && prev.opts?.newTab === next.opts?.newTab;
+})
+
+export default UriCellMemoized;

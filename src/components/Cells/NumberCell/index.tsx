@@ -1,10 +1,11 @@
-import {useContext, useState} from 'react';
+import {memo, useContext, useState} from 'react';
 import {Tooltip, IconButton} from '@mui/material';
 import {Edit} from '@mui/icons-material';
 import {iNumberCell} from './interfaces';
 import {SimpleEditor} from '../../SimpleEditor';
 import {AlertsContext} from '../../App/App';
 import {onUpdateFactory} from '../../../server-effects';
+import './index.css';
 
 // Probably the simplest cell we have
 export function NumberCell(props: iNumberCell) {
@@ -30,7 +31,13 @@ export function NumberCell(props: iNumberCell) {
   return (
     <>
       {isEditing && editor}
-      {!isEditing && <span className="number-cell">{value} {props.editable && editButton}</span>}
+      {!isEditing && <span className={`number-cell ${props.editable && "editable"}`}>{value} {props.editable && editButton}</span>}
     </>
   )
 }
+
+const NumberCellMemoized = memo(NumberCell, (prev : iNumberCell, next : iNumberCell) => {
+  return prev.value === next.value && prev.editable === next.editable;
+})
+
+export default NumberCellMemoized;

@@ -1,10 +1,11 @@
-import {useContext, useState} from 'react';
+import {memo, useContext, useState} from 'react';
 import {Tooltip, IconButton} from '@mui/material';
 import {Edit} from '@mui/icons-material';
 import {iStringCell} from './interfaces';
 import {SimpleEditor} from '../../SimpleEditor';
 import {AlertsContext} from '../../App/App';
 import {onUpdateFactory} from '../../../server-effects';
+import './index.css';
 
 // Okay I thought the number cell was the simplest, but THIS is probably the simplest cell we have
 export function StringCell(props: iStringCell) {
@@ -30,7 +31,13 @@ export function StringCell(props: iStringCell) {
   return (
     <>
       {isEditing && editor}
-      {!isEditing && <span className="string-cell">{value} {props.editable && editButton}</span>}
+      {!isEditing && <span className={`string-cell ${props.editable && "editable"}`}>{value} {props.editable && editButton}</span>}
     </>
   )
 }
+
+const StringCellMemoized = memo(StringCell, (prev : iStringCell, next : iStringCell) => {
+  return prev.value === next.value && prev.editable === next.editable;
+})
+
+export default StringCellMemoized;

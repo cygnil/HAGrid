@@ -1,7 +1,7 @@
 import {useState} from "react";
 import natsort from "natsort";
 import {Avatar, CircularProgress, List, ListItem, TextField, Tooltip} from "@mui/material";
-import {User} from "../User";
+import User from "../User";
 import {iUser} from "../App/interfaces";
 import {iUserEditor} from "./interfaces";
 import users from "../../assets/users.json";
