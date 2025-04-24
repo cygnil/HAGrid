@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {TextField} from "@mui/material";
 import {iSimpleEditor} from "./interfaces";
-import {Tooltip} from "react-tooltip";
 import './index.css';
 
 export function SimpleEditor(props: iSimpleEditor) {
@@ -19,7 +18,7 @@ export function SimpleEditor(props: iSimpleEditor) {
     const handleBlur = async () => {
         if (!validate || validate(inputValue)) {
             const success = await onUpdate(inputValue);
-            onUpdateFinished(success);
+            onUpdateFinished(success, inputValue);
         }
     };
 
@@ -38,7 +37,7 @@ export function SimpleEditor(props: iSimpleEditor) {
         if (event.key === "Escape") {
             setInputValue(value); // Reset to original value on escape
             setIsValueValid(true);
-            onUpdateFinished(false); // Signal that editing is finished without sending a new value
+            onUpdateFinished(false, null); // Signal that editing is finished without sending a new value
         }
     };
 
@@ -50,12 +49,13 @@ export function SimpleEditor(props: iSimpleEditor) {
                 error={!isValueValid}
                 value={inputValue}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                onKeyUp={handleKeyUp}
-                data-tooltip-id="validate-tooltip"
-                data-tooltip-content={isValueValid ? "" : "Invalid input"}
+                slotProps={{
+                    htmlInput: {
+                        onBlur: handleBlur,
+                        onKeyUp: handleKeyUp
+                    }
+                }}
             />
-            <Tooltip id="validate-tooltip" place="top" className="tooltip" variant="error" imperativeModeOnly={true} />
         </>
     );
 }

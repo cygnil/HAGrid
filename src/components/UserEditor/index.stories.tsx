@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     value: ["alice", "bob"],
-    onUpdate: action('onUpdate'),
+    onUpdate: () => new Promise<boolean>((resolve) => {action("onUpdate"); resolve(true);}),
     onUpdateFinished: action('onUpdateFinished')
   },
 };

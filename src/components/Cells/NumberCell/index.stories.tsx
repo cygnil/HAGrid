@@ -15,6 +15,7 @@ export const Default: Story = {
   args: {
     value: 5,
     columnId: "foo",
+    dataId: 1,
     type: "number",
   },
 };
@@ -23,6 +24,7 @@ export const Editable: Story = {
   args: {
     value: 5,
     columnId: "foo",
+    dataId: 1,
     type: "number",
     editable: true
   }

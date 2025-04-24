@@ -7,7 +7,8 @@
     {
         "id": "codeName",
         "type": "string",
-        "title": "Code Name"
+        "title": "Code Name",
+        "editable": true
     },
     {
         "id": "profile",
