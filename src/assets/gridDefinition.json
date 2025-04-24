@@ -1,11 +1,6 @@
 [
     {
-        "id": "id",
-        "type": "number",
-        "title": "ID"
-    },
-    {
-        "id": "codeName",
+        "id": "project",
         "type": "string",
         "title": "Code Name",
         "editable": true
@@ -17,7 +12,13 @@
         "editable": true
     },
     {
-        "id": "users",
+        "id": "daysNoAccident",
+        "type": "number",
+        "title": "Days Without Accident",
+        "editable": true
+    },
+    {
+        "id": "assignedUsers",
         "type": "users",
         "title": "Assigned Users",
         "editable": true

@@ -1,4 +1,4 @@
 [
-    {"id": 11, "codeName": "007", "profile": "http://example.com", "users": ["alice", "bob"]},
-    {"id": 222, "codeName": "Goliath", "profile": "https://linkedin.com", "users": ["christy"]}
+    {"id": 11, "project": "Mercury", "daysNoAccident": 4, "profile": "http://example.com", "assignedUsers": ["alice", "bob"]},
+    {"id": 222, "project": "Setec Astronomy", "daysNoAccident": 230, "profile": "https://linkedin.com", "assignedUsers": ["christy"]}
 ]
