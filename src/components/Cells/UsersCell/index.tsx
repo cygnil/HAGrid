@@ -28,14 +28,12 @@ export function UsersCell(props: iUsersCell) {
     // TODO: Clean this up
     const nullUser = {userId: '', name: '', avatarUri: ''};
 
-    const editButton = <Tooltip title="Edit"><IconButton className="edit-button" size="small" onClick={() => {setIsEditing(!isEditing)}}><Edit /></IconButton></Tooltip>;
-
     // It's a dilemma whether to put the update function here or somewhere else. In a real application I would opt for keeping
     // side effects like server updates separate (we'd probably even be using GraphQL!), but for this demo it's easier to keep it here
     // both for practical concerns and for ease of reference when reviewing the code. One big downside with keeping it here is that a new function
     // is created every time the component is rendered, which is a big performance hit.
     const onUpdate = async (val: string[]) => {
-        const baseServerUri = config.server.protocol + "://" + config.server.host + ":" + config.server.port;
+        const baseServerUri = config.server.protocol + "://" + config.server.host + (config.server.port ? ":" + config.server.port : "");
         const updateUser = async () => {
           const response = await fetch(baseServerUri + "/update", {
             method: 'POST',
@@ -57,9 +55,9 @@ export function UsersCell(props: iUsersCell) {
     };
     const onUpdateFinished = () => {return null};
 
-    const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-        <Tooltip {...props} classes={{ popper: className }} />
-      ))(({ theme }) => ({
+    const LightTooltip = styled(({className, ...props}: TooltipProps) => (
+        <Tooltip {...props} classes={{popper: className}} />
+      ))(({theme}) => ({
         [`& .${tooltipClasses.tooltip}`]: {
           backgroundColor: theme.palette.common.white,
           color: 'rgba(0, 0, 0, 0.87)',
@@ -81,7 +79,15 @@ export function UsersCell(props: iUsersCell) {
                     </LightTooltip>
                 </>
             }
-            {props.editable && editButton}
+            {props.editable && 
+                <>
+                    <Tooltip title="Edit">
+                        <IconButton className="edit-button" size="small" onClick={() => {setIsEditing(!isEditing)}}>
+                            <Edit />
+                        </IconButton>
+                    </Tooltip>
+                </>
+            }
             <Popover
                 open={isEditing}
                 anchorEl={document.querySelector('.edit-button')}

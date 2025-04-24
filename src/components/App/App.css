@@ -4,3 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
+.alert-area {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 25rem);
+  width: 50rem;
+  z-index: 1000;
+}

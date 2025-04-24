@@ -1,3 +1,5 @@
+import {iAlert} from "../AlertContainer/interfaces";
+
 export interface iDataRow {
     id: number; // Unique identifier for the row
     codeName: string; // A basic string
@@ -19,4 +21,9 @@ export interface iDataContext {
 export interface iUsersContext {
     users: iUser[]; // The list of users
     setUsers: (users: iUser[]) => void; // Function to update the users
+}
+
+export interface iAlertsContext {
+    alerts: iAlert[]; // All queued alerts
+    setAlerts: (users: iAlert[]) => void; // Function to update the alerts
 }
