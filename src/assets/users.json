@@ -4,5 +4,20 @@
     {"userId": "christy", "name": "Christy", "avatarUri": "https://octodex.github.com/images/ironcat.jpg"},
     {"userId": "frank", "name": "Frank", "avatarUri": "https://octodex.github.com/images/filmtocats.png"},
     {"userId": "eve", "name": "Eve", "avatarUri": "https://octodex.github.com/images/surftocat.png"},
-    {"userId": "david", "name": "David", "avatarUri": "https://octodex.github.com/images/skatetocat.png"}
+    {"userId": "david", "name": "David", "avatarUri": "https://octodex.github.com/images/skatetocat.png"},
+    {"userId": "genevieve", "name": "Genevieve", "avatarUri": "https://octodex.github.com/images/robotocat.png"},
+    {"userId": "harry", "name": "Harry", "avatarUri": "https://octodex.github.com/images/spacecat.png"},
+    {"userId": "imogen", "name": "Imogen", "avatarUri": "https://octodex.github.com/images/steampunk.png"},
+    {"userId": "james", "name": "James", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "katherine", "name": "Katherine", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "luke", "name": "Luke", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "michael", "name": "Michael", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "nina", "name": "Nina", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "olivia", "name": "Olivia", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "paul", "name": "Paul", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "quincy", "name": "Quincy", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "rachel", "name": "Rachel", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "sophia", "name": "Sophia", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "thomas", "name": "Thomas", "avatarUri": "https://octodex.github.com/images/jesus.png"},
+    {"userId": "uma", "name": "Uma", "avatarUri": ""}
 ]

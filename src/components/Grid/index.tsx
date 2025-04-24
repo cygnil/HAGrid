@@ -23,14 +23,14 @@ export function Grid(props: iGrid) {
   return (
     <>
       <TableContainer component={Paper} className="grid-table-container">
-        <Table className="grid-table" stickyHeader aria-label="sticky table">
+        <Table className="grid-table" stickyHeader aria-label="sticky table" size="small">
           <TableHead>
             <TableRow>
               <Cell type="checkbox" dataId={-1} columnId="__select__" value={false} opts={{onUpdate: onSelectAll}} />
               {
                 props.definition.map((header) => {
                   return (
-                    <HeaderCell title={header.title} id={header.id} />
+                    <HeaderCell title={header.title} id={header.id} key={header.id} />
                   )
                 })
               }

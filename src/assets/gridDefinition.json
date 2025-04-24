@@ -17,7 +17,7 @@
     {
         "id": "users",
         "type": "users",
-        "title": "Users",
+        "title": "Assigned Users",
         "editable": true
     }
 ]

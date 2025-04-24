@@ -5,3 +5,7 @@
   height: 100vh;
   flex-direction: column;
 }
+
+.loading-state-spinner img {
+  width: 42px;
+}

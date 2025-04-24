@@ -1,5 +1,5 @@
 export interface iUserEditor {
     value: string[];
-    onUpdate: (value: string[]) => void;
-    onUpdateFinished: () => void;
+    onUpdate: (value: string[]) => Promise<boolean>;
+    onUpdateFinished: (success: boolean) => void;
 }

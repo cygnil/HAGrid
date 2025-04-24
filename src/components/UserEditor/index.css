@@ -1,16 +1,31 @@
 .user-editor {
   width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .existing-users {
   display: flex;
+  flex-wrap: wrap;;
+  padding: 8px;
+
+  .user-editor-user {
+    padding: 1px;
+    cursor: pointer;
+  }
+}
+
+.user-editor-input-box {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .addable-users {
   display: flex;
   flex-direction: column;
+  gap: 0px;
 
-  .user {
-    border-top: 1px solid #aaaaaa;
+  .user-editor-user .user {
+    cursor: pointer;
   }
 }

@@ -1,6 +1,8 @@
 import {useState, useContext} from 'react';
-import {Tooltip} from 'react-tooltip';
-import {Chip} from '@mui/material';
+import {Chip, IconButton, Popover, Tooltip} from '@mui/material';
+import {TooltipProps, tooltipClasses} from '@mui/material/Tooltip';
+import {styled} from '@mui/material/styles';
+import {Edit} from '@mui/icons-material';
 import {iUsersCell} from './interfaces';
 import {User} from '../../User';
 import {UserEditor} from '../../UserEditor';
@@ -26,11 +28,12 @@ export function UsersCell(props: iUsersCell) {
     // TODO: Clean this up
     const nullUser = {userId: '', name: '', avatarUri: ''};
 
-    const editButton = <button className="edit-button" onClick={() => {setIsEditing(!isEditing)}}>Edit</button>
+    const editButton = <Tooltip title="Edit"><IconButton className="edit-button" size="small" onClick={() => {setIsEditing(!isEditing)}}><Edit /></IconButton></Tooltip>;
 
     // It's a dilemma whether to put the update function here or somewhere else. In a real application I would opt for keeping
     // side effects like server updates separate (we'd probably even be using GraphQL!), but for this demo it's easier to keep it here
-    // both for practical concerns and for ease of reference when reviewing the code.
+    // both for practical concerns and for ease of reference when reviewing the code. One big downside with keeping it here is that a new function
+    // is created every time the component is rendered, which is a big performance hit.
     const onUpdate = async (val: string[]) => {
         const baseServerUri = config.server.protocol + "://" + config.server.host + ":" + config.server.port;
         const updateUser = async () => {
@@ -54,22 +57,48 @@ export function UsersCell(props: iUsersCell) {
     };
     const onUpdateFinished = () => {return null};
 
+    const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+        <Tooltip {...props} classes={{ popper: className }} />
+      ))(({ theme }) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+          backgroundColor: theme.palette.common.white,
+          color: 'rgba(0, 0, 0, 0.87)',
+          boxShadow: theme.shadows[1],
+          fontSize: 11,
+        },
+      }));
+
     return (
         <div className="users-cell">
             <User {...(userMap.get(value[0]) || nullUser)} />
             {value.length > 1 &&
                 <>
-                    <Chip className="users-show-more" data-tooltip-id="show-users" label={"+" + (value.length - 1)} />
-                    <Tooltip id="show-users" place="top" className="tooltip" variant="info">
-                        {value.slice(1).map((userId: string) => {
+                    <LightTooltip className='more-users' title={value.slice(1).map((userId: string) => {
                             const user = userMap.get(userId) || nullUser;
                             return <User key={user.userId} {...user} />;
-                        })}
-                    </Tooltip>
+                        })}>
+                        <Chip className="users-show-more" data-tooltip-id="show-users" label={"+" + (value.length - 1)} />
+                    </LightTooltip>
                 </>
             }
             {props.editable && editButton}
-            {isEditing && <UserEditor value={value} onUpdate={onUpdate} onUpdateFinished={onUpdateFinished} />}
+            <Popover
+                open={isEditing}
+                anchorEl={document.querySelector('.edit-button')}
+                onClose={() => setIsEditing(false)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+            >
+                <div className="popover-content">
+                    <UserEditor value={value} onUpdate={onUpdate} onUpdateFinished={onUpdateFinished} />
+                </div>
+            </Popover>
         </div>
     );
 }

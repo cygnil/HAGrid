@@ -2,5 +2,5 @@ export interface iSimpleEditor {
     value: any;
     validate?: (value: any) => boolean;
     onUpdate: (value: any) => Promise<boolean>;
-    onUpdateFinished: () => void;
+    onUpdateFinished: (success: boolean) => void;
 }

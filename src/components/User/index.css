@@ -1,14 +1,5 @@
-img {
-    width: 36px;
-    height: 36px;
-}
-
 .user {
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
-
-    &:not(:first-child) {
-        margin-left: 1rem;
-    }
+  .MuiChip-label {
+    max-width: 8rem;
+  }
 }

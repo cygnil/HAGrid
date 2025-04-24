@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import {Tooltip, IconButton} from '@mui/material';
+import {Edit} from '@mui/icons-material';
 import {iStringCell} from './interfaces';
 import {SimpleEditor} from '../../SimpleEditor';
 
@@ -7,8 +9,7 @@ export function StringCell(props: iStringCell) {
   const [value, setValue] = useState(props.value);
   const [isEditing, setIsEditing] = useState(false);
 
-  // TODO: This is so ugly, make it more elegant
-  const editButton = <button className="edit-button" onClick={() => {setIsEditing(!isEditing)}}>Edit</button>;
+  const editButton = <Tooltip title="Edit"><IconButton className="edit-button" size="small" onClick={() => {setIsEditing(!isEditing)}}><Edit /></IconButton></Tooltip>;
 
   const onUpdate = async (val: string) => {
     setValue(val);

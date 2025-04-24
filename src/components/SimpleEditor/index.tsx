@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {TextField} from "@mui/material";
 import {iSimpleEditor} from "./interfaces";
 import {Tooltip} from "react-tooltip";
 import './index.css';
@@ -15,10 +16,10 @@ export function SimpleEditor(props: iSimpleEditor) {
     };
 
     // Handle blur event and update if input is valid or no validator function is provided
-    const handleBlur = () => {
+    const handleBlur = async () => {
         if (!validate || validate(inputValue)) {
-            onUpdate(inputValue);
-            onUpdateFinished();
+            const success = await onUpdate(inputValue);
+            onUpdateFinished(success);
         }
     };
 
@@ -37,15 +38,16 @@ export function SimpleEditor(props: iSimpleEditor) {
         if (event.key === "Escape") {
             setInputValue(value); // Reset to original value on escape
             setIsValueValid(true);
-            onUpdateFinished(); // Signal that editing is finished without sending a new value
+            onUpdateFinished(false); // Signal that editing is finished without sending a new value
         }
     };
 
     return (
         <>
-            <input
+            <TextField
                 className={`simple-editor ${isValueValid ? "" : "invalid"}`}
-                type='text'
+                size="small"
+                error={!isValueValid}
                 value={inputValue}
                 onChange={handleChange}
                 onBlur={handleBlur}
