@@ -8,14 +8,15 @@ import {User} from '../../User';
 import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
 import {iUser} from '../../App/interfaces';
-import {UsersContext} from '../../App/App';
-import config from '../../../config.json';
+import {AlertsContext, UsersContext} from '../../App/App';
+import {onUpdateFactory} from '../../../server-effects';
 import './index.css';
 
 export function UsersCell(props: iUsersCell) {
     const [value, setValue] = useState(props.value);
     const [isEditing, setIsEditing] = useState(false);
     const {users} = useContext(UsersContext);
+    const {alerts, setAlerts} = useContext(AlertsContext);
 
     // This really pains me to write, it's so inefficient. But we'll improve it later, for now let's use it to just move on with development
     // Using a Map because it plays better with TypeScript; defining an entire interface is too heavyweight for this
@@ -28,32 +29,8 @@ export function UsersCell(props: iUsersCell) {
     // TODO: Clean this up
     const nullUser = {userId: '', name: '', avatarUri: ''};
 
-    // It's a dilemma whether to put the update function here or somewhere else. In a real application I would opt for keeping
-    // side effects like server updates separate (we'd probably even be using GraphQL!), but for this demo it's easier to keep it here
-    // both for practical concerns and for ease of reference when reviewing the code. One big downside with keeping it here is that a new function
-    // is created every time the component is rendered, which is a big performance hit.
-    const onUpdate = async (val: string[]) => {
-        const baseServerUri = config.server.protocol + "://" + config.server.host + (config.server.port ? ":" + config.server.port : "");
-        const updateUser = async () => {
-          const response = await fetch(baseServerUri + "/update", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({id: props.dataId, values: [{column: "users", value: val}]}),
-          });
-          if (!response.ok) {
-            throw new Error("Network response was not ok when updating user " + props.dataId);
-          } else {
-            setValue(val);
-          }
-          return response.ok;
-        }
-
-        const success = await updateUser();
-        return success;
-    };
-    const onUpdateFinished = () => {return null};
+    const onUpdate = onUpdateFactory(props.columnId, props.dataId, alerts, setAlerts);
+    const onUpdateFinished = (success: boolean, value : string[]) => {if (success) setValue(value)};
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}} />

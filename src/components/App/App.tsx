@@ -18,27 +18,39 @@ function App() {
   const [users, setUsers] = React.useState<iUser[]>([]);
   const [alerts, setAlerts] = React.useState<iAlert[]>([]);
 
+  // Avoid network race conditions in development envs, even though it's the same static data
+  let fetchingData = false;
+  let fetchingUsers = false;
+
   // Effect right off the bat to simultaneously fetch data and users from the server
   useEffect(() => {
     const serverBaseUri = config.server.protocol + "://" + config.server.host + (config.server.port ? ":" + config.server.port : "");
 
     const fetchData = async () => {
-      const response = await fetch(serverBaseUri + "/data", {method: "POST", headers: {"Content-Type": "application/json"}});
-      if (!response.ok) {
-        setAlerts(alerts.concat({severity: "error", message: "Network response was not ok when fetching data"}));
-      } else {
-        const json: iDataRow[] = await response.json()
-        setData(json);
+      if (!fetchingData) {
+        fetchingData = true;
+        const response = await fetch(serverBaseUri + "/data", {method: "POST", headers: {"Content-Type": "application/json"}});
+        if (!response.ok) {
+          setAlerts(alerts.concat({severity: "error", message: "Network response was not ok when fetching data"}));
+        } else {
+          const json: iDataRow[] = await response.json()
+          setData(json);
+        }
+        fetchingData = false;
       }
     }
 
     const fetchUsers = async () => {
-      const response = await fetch(serverBaseUri + "/users", {method: "POST", headers: {"Content-Type": "application/json"}});
-      if (!response.ok) {
-        setAlerts(alerts.concat({severity: "error", message: "Network response was not ok when fetching users"}));
-      } else {
-        const json: iUser[] = await response.json()
-        setUsers(json);
+      if (!fetchingUsers) {
+        fetchingUsers = true;
+        const response = await fetch(serverBaseUri + "/users", {method: "POST", headers: {"Content-Type": "application/json"}});
+        if (!response.ok) {
+          setAlerts(alerts.concat({severity: "error", message: "Network response was not ok when fetching users"}));
+        } else {
+          const json: iUser[] = await response.json()
+          setUsers(json);
+        }
+        fetchingUsers = false;
       }
     }
 

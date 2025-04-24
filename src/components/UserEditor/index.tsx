@@ -31,7 +31,7 @@ export function UserEditor(props: iUserEditor) {
         setIsUpdating(true);
         setSelectedUsers(newValue);
         const success = await onUpdate(newValue);
-        onUpdateFinished(success);
+        onUpdateFinished(success, newValue);
         if (!success) {
             setSelectedUsers(oldValue);
         }
@@ -44,7 +44,7 @@ export function UserEditor(props: iUserEditor) {
         setIsUpdating(true);
         setSelectedUsers(newValue);
         const success = await onUpdate(newValue);
-        onUpdateFinished(success);
+        onUpdateFinished(success, newValue);
         if (!success) {
             setSelectedUsers(oldValue);
         }
