@@ -1,11 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
 import {NumberCell} from './index';
 
 const meta = {
   component: NumberCell,
   title: 'Cells/NumberCell',
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "A cell for dsplaying a number. **Note that the editable version will not validate** scientific notation (e.g. 1.34e5) or European format numbers (e.g. '1,34' instead of '1.34')"
+      }
+    }
+  }
+
 } satisfies Meta<typeof NumberCell>;
 
 export default meta;

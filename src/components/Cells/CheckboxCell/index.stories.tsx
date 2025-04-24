@@ -1,11 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
 import {CheckboxCell} from './index';
 
 const meta = {
   component: CheckboxCell,
   title: 'Cells/CheckboxCell',
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "A simple checkbox cell. Please be sure to import the default version if you want a memoized cell."
+      }
+    }
+  }
+
 } satisfies Meta<typeof CheckboxCell>;
 
 export default meta;

@@ -1,11 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 
 import {UsersCell} from './index';
 
 const meta = {
   component: UsersCell,
   title: 'Cells/UsersCell',
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "A cell for displaying users. Or at least, one user and a tag with the names of everyone else. The editable version will open a popup with a userEditor component."
+      }
+    }
+  }
+
 } satisfies Meta<typeof UsersCell>;
 
 export default meta;

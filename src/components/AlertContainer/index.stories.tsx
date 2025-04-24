@@ -5,7 +5,15 @@ import {AlertContainer} from './index';
 const meta = {
   component: AlertContainer,
   title: 'AlertContainer',
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "A box for showing various alerts. It takes the same severity parameters as the MUI Alert (success|info|warning|error) and display as many alerts " +
+        "as are fed to it. Note that the developer is on the hook for managing when alerts disappear."
+      }
+    }
+  }
 } satisfies Meta<typeof AlertContainer>;
 
 export default meta;

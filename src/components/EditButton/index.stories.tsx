@@ -6,7 +6,14 @@ import {EditButton} from './index';
 const meta = {
   component: EditButton,
   title: 'EditButton',
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "This is a simple edit button for use in editable cells. No frills, no muss."
+      }
+    }
+  }
 } satisfies Meta<typeof EditButton>;
 
 export default meta;

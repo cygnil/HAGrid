@@ -5,7 +5,15 @@ import {LoadingState} from './index';
 const meta = {
   component: LoadingState,
   title: 'LoadingState',
-  tags: ['autodocs']
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "This is a basic loading state, nothing to see here."
+      }
+    }
+  }
+
 } satisfies Meta<typeof LoadingState>;
 
 export default meta;
