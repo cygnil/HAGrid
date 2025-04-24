@@ -7,6 +7,7 @@ export function SimpleEditor(props: iSimpleEditor) {
     const {value, validate, onUpdate, onUpdateFinished} = props;
     const [inputValue, setInputValue] = useState(value);
     const [isValueValid, setIsValueValid] = useState(true);
+    const [validationMessage, setValidationMessage] = useState("");
 
     // Handle input change and update the state
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,10 +26,13 @@ export function SimpleEditor(props: iSimpleEditor) {
     // Handle key up event for Enter and Escape keys, and validate the input value
     const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (validate) {
-            if (validate(inputValue)) {
+            const validation = validate(inputValue);
+            if (validation.isValid) {
                 setIsValueValid(true);
+                setValidationMessage("");
             } else {
                 setIsValueValid(false);
+                setValidationMessage(validation.message || "");
             }
         }
         if (event.key === "Enter") {
@@ -47,8 +51,10 @@ export function SimpleEditor(props: iSimpleEditor) {
                 className={`simple-editor ${isValueValid ? "" : "invalid"}`}
                 size="small"
                 error={!isValueValid}
+                helperText={validationMessage}
                 value={inputValue}
                 onChange={handleChange}
+                inputRef={input => input && input.focus()} // Set the blank to focus automatically so the user can just start typing
                 slotProps={{
                     htmlInput: {
                         onBlur: handleBlur,

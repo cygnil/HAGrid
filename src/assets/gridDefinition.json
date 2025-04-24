@@ -13,7 +13,8 @@
     {
         "id": "profile",
         "type": "uri",
-        "title": "Profile"
+        "title": "Profile",
+        "editable": true
     },
     {
         "id": "users",

@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
+import {Checkbox} from '@mui/material';
 import {iCheckboxCell} from './interfaces';
 
 export function CheckboxCell(props: iCheckboxCell) {
 
-    // Define a checkbox state, then add an effect for updating the main grid state of selected rows. Inefficient, this will be improved later.
-    const [isChecked, setisChecked] = useState<boolean>(!!props.value);
-    useEffect(() => {
-        if (props.opts?.onUpdate) {props.opts.onUpdate(isChecked)};
-    }, [isChecked]);
-    
-    return (
-        <input type="checkbox" className="checkbox-cell" checked={isChecked} onChange={() => setisChecked(!isChecked)} />
-    )
+  // Define a checkbox state, then add an effect for updating the main grid state of selected rows. Inefficient, this will be improved later.
+  const [isChecked, setisChecked] = useState<boolean>(!!props.value);
+  useEffect(() => {
+    if (props.opts?.onUpdate) {props.opts.onUpdate(isChecked)};
+  }, [isChecked]);
+  
+  return (
+    <Checkbox className="checkbox-cell" checked={isChecked} onChange={() => setisChecked(!isChecked)} />
+  )
 }

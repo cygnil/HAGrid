@@ -20,10 +20,9 @@ export function NumberCell(props: iNumberCell) {
     setIsEditing(false);
   }
 
-  // This is a half-finished editor for now, mostly this is just to play around with editing on a basic level
   const editor = <SimpleEditor
     value={value}
-    validate={(val: string) => /^\d*(\.\d*)?$/.test(val)}
+    validate={(val: string) => {return {isValid: /^\d*(\.\d*)?$/.test(val), message: "Does not appear to be a number!"}}}
     onUpdate={onUpdate}
     onUpdateFinished={onUpdateFinished}
   />;

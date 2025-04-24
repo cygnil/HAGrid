@@ -31,3 +31,13 @@ export const NewTab: Story = {
     }
   },
 };
+
+export const Editable: Story = {
+  args: {
+    value: "https://example.com",
+    columnId: "foo",
+    dataId: 1,
+    type: "uri",
+    editable: true
+  },
+};

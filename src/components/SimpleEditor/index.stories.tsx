@@ -24,7 +24,7 @@ export const WithValidation: Story = {
   args: {
     value: "LettersOnly",
     validate: (value: string) => {
-      return value.match(/^[a-zA-Z]+$/) !== null;
+      return {isValid: value.match(/^[a-zA-Z]+$/) !== null, message: "Input contains non-letter characters"};
     },
     onUpdate: () => new Promise<boolean>((resolve) => {action("Updating"); resolve(true);}),
     onUpdateFinished: action("Update finished")

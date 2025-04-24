@@ -18,9 +18,9 @@ export function onUpdateFactory(field: string, dataId: number, alerts: iAlertsCo
       });
       if (!response.ok) {
         // Not really happy with this method of adding an error and making it disappear after a certain time. I'd prefer to spend more time building out
-        // a whole alert system, especially if we had something liek redux instead of a shared context, but for one or two components this will work
+        // a whole alert system, especially if we had something like redux instead of a shared context, but for one or two components this will work
         setAlerts(alerts.concat({severity: "error", message: `Network response was not ok when updating users in row ${dataId} (${response.status}: ${response.statusText})`}));
-        setTimeout(() => setAlerts(alerts.slice(0)), 7000)
+        setTimeout(() => setAlerts(alerts.slice(1)), 7000)
       }
       return response.ok;
     }
