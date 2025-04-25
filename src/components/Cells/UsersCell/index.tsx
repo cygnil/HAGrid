@@ -11,16 +11,22 @@ import {onUpdateFactory} from '../../../server-effects';
 import './index.css';
 
 export function UsersCell(props: iUsersCell) {
-    const [value, setValue] = useState(props.value);
+    const [value = [], setValue] = useState(props.value);
     const [isEditing, setIsEditing] = useState(false);
     const {alerts, setAlerts} = useContext(AlertsContext);
     const {userMap} = useContext(UserMapContext);
+    const {maxUsers = 3} = props.opts || {};
 
     // This has some obvious problems if we're using the userId as a key for anything, especially if there's more than one null user
     const nullUser = {userId: '', name: '', avatarUri: ''};
 
     const onUpdate = onUpdateFactory(props.columnId, props.dataId, alerts, setAlerts);
     const onUpdateFinished = (success: boolean, value : string[]) => {if (success) setValue(value)};
+
+    const userElements = [];
+    for (let i = 0; i < Math.min(value.length, maxUsers); i++) {
+      userElements.push(<User {...(userMap.get(value[i]) || nullUser)} />);
+    }
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (
         <Tooltip {...props} classes={{popper: className}} />
@@ -34,29 +40,25 @@ export function UsersCell(props: iUsersCell) {
       }));
 
     return (
-        <div className="users-cell">
-            <User {...(userMap.get(value[0]) || nullUser)} />
-            {value.length > 1 &&
+        <div className={`users-cell row-id-${props.dataId}`}>
+            {userElements}
+            {value.length > maxUsers &&
                 <>
-                    <LightTooltip className='more-users' title={value.slice(1).map((userId: string) => {
+                    <LightTooltip className='more-users' title={value.slice(maxUsers).map((userId: string) => {
                             const user = userMap.get(userId) || nullUser;
                             return <User key={user.userId} {...user} />;
                         })}>
-                        <Chip className="users-show-more" data-tooltip-id="show-users" label={"+" + (value.length - 1)} />
+                        <Chip className="users-show-more" data-tooltip-id="show-users" label={"+" + (value.length - maxUsers)} />
                     </LightTooltip>
                 </>
             }
             {props.editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
             <Popover
               open={isEditing}
-              anchorEl={document.querySelector('.edit-button')}
+              anchorEl={document.querySelector(`.row-id-${props.dataId} .edit-button`)}
               onClose={() => setIsEditing(false)}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              transformOrigin={{
-                vertical: 'top',
                 horizontal: 'left',
               }}
             >
