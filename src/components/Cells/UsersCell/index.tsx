@@ -6,8 +6,7 @@ import {iUsersCell} from './interfaces';
 import User from '../../User';
 import {UserEditor} from '../../UserEditor';
 // TODO: Break users out into more effcient access method. Maybe redux?
-import {iUser} from '../../App/interfaces';
-import {AlertsContext, UsersContext} from '../../App/App';
+import {AlertsContext, UserMapContext} from '../../App/App';
 import {EditButton} from '../../EditButton';
 import {onUpdateFactory} from '../../../server-effects';
 import './index.css';
@@ -15,15 +14,8 @@ import './index.css';
 export function UsersCell(props: iUsersCell) {
     const [value, setValue] = useState(props.value);
     const [isEditing, setIsEditing] = useState(false);
-    const {users} = useContext(UsersContext);
     const {alerts, setAlerts} = useContext(AlertsContext);
-
-    // This really pains me to write, it's so inefficient. But we'll improve it later, for now let's use it to just move on with development
-    // Using a Map because it plays better with TypeScript; defining an entire interface is too heavyweight for this
-    const userMap = new Map<string, iUser>();
-    users.forEach((user: iUser) => {
-        userMap.set(user.userId, user);
-    });
+    const {userMap} = useContext(UserMapContext);
 
     // This has some obvious problems if we're using the userId as a key for anything, especially if there's more than one null user
     // TODO: Clean this up

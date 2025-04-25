@@ -23,6 +23,11 @@ export interface iUsersContext {
     setUsers: (users: iUser[]) => void; // Function to update the users
 }
 
+export interface iUserMapContext {
+    userMap: Map<string, iUser>;
+    setUserMap: (userMap: Map<string, iUser>) => void;
+}
+
 export interface iAlertsContext {
     alerts: iAlert[]; // All queued alerts
     setAlerts: (users: iAlert[]) => void; // Function to update the alerts
