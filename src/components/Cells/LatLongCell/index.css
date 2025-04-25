@@ -1,0 +1,12 @@
+.latlong-cell.editable {
+  display: inline-block;
+  padding-right: 32px;
+  width: calc(100% - 32px);
+  position: relative;
+
+  .edit-button {
+    position: absolute;
+    right: 0px;
+    top: -0.25rem;
+  }
+}
