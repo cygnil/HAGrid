@@ -7,7 +7,7 @@ export function EditButton(props : iEditButton) {
     <>
       <Tooltip title="Edit">
           <IconButton className="edit-button" size="small" onClick={props.onClick}>
-              <Edit sx={{width: 18}} />
+              <Edit sx={{width: 18, height: 18}} />
           </IconButton>
       </Tooltip>
     </>

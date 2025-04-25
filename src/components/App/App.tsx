@@ -54,7 +54,7 @@ function App() {
 
           // When data is loaded, assign each user to a map for easy lookup based on user ID--much better than iterating through arrays! Share this through a context
           const newUserMap = new Map<string, iUser>();
-          users.forEach((user: iUser) => {
+          json.forEach((user: iUser) => {
               newUserMap.set(user.userId, user);
           });
           setUserMap(newUserMap);

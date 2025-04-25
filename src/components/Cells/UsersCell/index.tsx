@@ -50,21 +50,21 @@ export function UsersCell(props: iUsersCell) {
             }
             {props.editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
             <Popover
-                open={isEditing}
-                anchorEl={document.querySelector('.edit-button')}
-                onClose={() => setIsEditing(false)}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
+              open={isEditing}
+              anchorEl={document.querySelector('.edit-button')}
+              onClose={() => setIsEditing(false)}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
             >
-                <div className="popover-content">
-                    <UserEditor value={value} onUpdate={onUpdate} onUpdateFinished={onUpdateFinished} />
-                </div>
+              <div className="popover-content">
+                <UserEditor value={value} onUpdate={onUpdate} onUpdateFinished={onUpdateFinished} />
+              </div>
             </Popover>
         </div>
     );

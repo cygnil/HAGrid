@@ -1,10 +1,10 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import natsort from "natsort";
 import {Avatar, CircularProgress, List, ListItem, TextField, Tooltip} from "@mui/material";
 import User from "../User";
 import {iUser} from "../App/interfaces";
+import {UserMapContext} from "../App/App";
 import {iUserEditor} from "./interfaces";
-import users from "../../assets/users.json";
 import "./index.css";
 
 export function UserEditor(props: iUserEditor) {
@@ -12,13 +12,8 @@ export function UserEditor(props: iUserEditor) {
     const [selectedUsers, setSelectedUsers] = useState<string[]>(value);
     const [userFilter, setUserFilter] = useState<string>("");
     const [isUpdating, setIsUpdating] = useState<boolean>(false);
+    const {userMap} = useContext(UserMapContext);
     const sorter = natsort({desc: false, insensitive: true});
-
-    // TODO: Rewrite this when loading the users is finalized
-    const userMap = new Map<string, iUser>();
-    users.forEach((user: iUser) => {
-        userMap.set(user.userId, user);
-    });
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value;
