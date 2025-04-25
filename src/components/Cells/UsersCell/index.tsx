@@ -5,7 +5,6 @@ import {styled} from '@mui/material/styles';
 import {iUsersCell} from './interfaces';
 import User from '../../User';
 import {UserEditor} from '../../UserEditor';
-// TODO: Break users out into more effcient access method. Maybe redux?
 import {AlertsContext, UserMapContext} from '../../App/App';
 import {EditButton} from '../../EditButton';
 import {onUpdateFactory} from '../../../server-effects';
@@ -18,7 +17,6 @@ export function UsersCell(props: iUsersCell) {
     const {userMap} = useContext(UserMapContext);
 
     // This has some obvious problems if we're using the userId as a key for anything, especially if there's more than one null user
-    // TODO: Clean this up
     const nullUser = {userId: '', name: '', avatarUri: ''};
 
     const onUpdate = onUpdateFactory(props.columnId, props.dataId, alerts, setAlerts);
