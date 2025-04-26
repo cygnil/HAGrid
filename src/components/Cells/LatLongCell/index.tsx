@@ -18,7 +18,16 @@ export function LatLongCell(props: iLatLongCell) {
     setIsEditing(false);
   }
 
-  const validate = (val: string) => {return {isValid: /^[+-]?\d+(\.\d+)?, *[+-]?\d+(\.\d+)?$/.test(val), message: "Does not appear to be a valiid lat/long entry!"}}
+  const validate = (val: string) => {
+    if (!/^[+-]?\d+(\.\d+)?, *[+-]?\d+(\.\d+)?$/.test(val))
+      return {isValid: false, message: "Does not appear to be a valiid lat/long entry!"}
+    const [lat, long] = [parseFloat(val.replace(/,.*/, "")), parseFloat(val.replace(/^[^,]*, */, ""))];
+    if (lat < -90 || lat > 90)
+      return {isValid: false, message: `Latitude is ${lat < -90 ? "less" : "greater"} than ${lat < -90 ? "-" : ""}90`};
+    if (long < -180 || long > 180)
+      return {isValid: false, message: `Longitude is ${long < -180 ? "less" : "greater"} than ${long < -180 ? "-" : ""}180`};
+    return {isValid: true, message: ""};
+  }
 
   const editor = <SimpleEditor
     value={value}

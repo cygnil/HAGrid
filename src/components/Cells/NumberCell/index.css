@@ -9,4 +9,12 @@
     right: 0px;
     top: -0.25rem;
   }
+
+  .num-graph {
+    width: 60px;
+    display: inline-block;
+    position: relative;
+    left: 0.5rem;
+    top: -0.25rem;
+  }
 }

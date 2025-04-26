@@ -9,8 +9,8 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "A cell for displaying a location given by a latitude and longitude combo. The editor will validate the form, but not the range of the number (i.e. " +
-        "latitude ranges from -90 to +90, and longitude ranges from -180 to +180)"
+        component: "A cell for displaying a location given by a latitude and longitude combo. The editor will validate the form, as well as the range of the number (i.e. " +
+        "latitude ranges from -90 to +90, and longitude ranges from -180 to +180). **Note that lat/long must be given as a number, not in the form 'xxx [N|S], yyy [E|W]'**."
       }
     }
   }
