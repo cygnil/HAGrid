@@ -1,12 +1,12 @@
 [
-    {"id": 11, "project": "Mercury", "daysNoAccident": 4, "profile": "http://example.com", "assignedUsers": ["alice", "bob"]},
-    {"id": 222, "project": "Setec Astronomy", "daysNoAccident": 230, "profile": "https://linkedin.com", "assignedUsers": ["christy"]},
-    {"id": 333, "project": "Apollo", "daysNoAccident": 12, "profile": "http://apollo.com", "assignedUsers": ["david", "eve"]},
-    {"id": 444, "project": "Gemini", "daysNoAccident": 45, "profile": "http://gemini.com", "assignedUsers": ["frank"]},
-    {"id": 555, "project": "Artemis", "daysNoAccident": 78, "profile": "http://artemis.com", "assignedUsers": ["genevieve", "hank", "quincy"]},
-    {"id": 666, "project": "Voyager", "daysNoAccident": 150, "profile": "http://voyager.com", "assignedUsers": ["imogen"]},
-    {"id": 777, "project": "Pioneer", "daysNoAccident": 500, "profile": "http://pioneer.com", "assignedUsers": ["james", "kate"]},
-    {"id": 888, "project": "Discovery", "daysNoAccident": 62, "profile": "http://discovery.com", "assignedUsers": ["luke"]},
-    {"id": 999, "project": "Endeavour", "daysNoAccident": 80, "profile": "http://endeavour.com", "assignedUsers": ["michael", "nina", "thomas", "yani"]},
-    {"id": 1010, "project": "Atlantis", "daysNoAccident": 200, "profile": "http://atlantis.com", "assignedUsers": ["olivia"]}
+    {"id": 11, "project": "Mercury", "daysNoAccident": 4, "profile": "http://example.com", "assignedUsers": ["alice", "bob"], "location": "44.954445,-93.091301", "relevance": 64},
+    {"id": 222, "project": "Setec Astronomy", "daysNoAccident": 230, "profile": "https://linkedin.com", "assignedUsers": ["christy"], "location": "37.7749,-122.4194", "relevance": 23},
+    {"id": 333, "project": "Apollo", "daysNoAccident": 12, "profile": "http://apollo.com", "assignedUsers": ["david", "eve"], "location": "42.279594,-83.732124", "relevance": 76},
+    {"id": 444, "project": "Gemini", "daysNoAccident": 45, "profile": "http://gemini.com", "assignedUsers": ["frank"], "location": "29.424349,-98.491142", "relevance": 42},
+    {"id": 555, "project": "Artemis", "daysNoAccident": 78, "profile": "http://artemis.com", "assignedUsers": ["genevieve", "hank", "quincy"], "location": "40.217052,-74.742935", "relevance": 90},
+    {"id": 666, "project": "Voyager", "daysNoAccident": 150, "profile": "http://voyager.com", "assignedUsers": ["imogen"], "location": "26.011280,-80.142967", "relevance": 47},
+    {"id": 777, "project": "Pioneer", "daysNoAccident": 500, "profile": "http://pioneer.com", "assignedUsers": ["james", "kate"], "location": "37.270500,-107.878700", "relevance": 10},
+    {"id": 888, "project": "Discovery", "daysNoAccident": 62, "profile": "http://discovery.com", "assignedUsers": ["luke"], "location": "36.188110,-115.176468", "relevance": 23},
+    {"id": 999, "project": "Endeavour", "daysNoAccident": 80, "profile": "http://endeavour.com", "assignedUsers": ["michael", "nina", "thomas", "yani"], "location": "44.944099,-123.040283", "relevance": 95},
+    {"id": 1010, "project": "Atlantis", "daysNoAccident": 200, "profile": "http://atlantis.com", "assignedUsers": ["olivia"], "location": "40.667133,-91.513542", "relevance": 59}
 ]

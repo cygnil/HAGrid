@@ -18,9 +18,29 @@
         "editable": true
     },
     {
+        "id": "relevance",
+        "type": "number",
+        "title": "Project Relevance",
+        "editable": true,
+        "opts": {
+            "min": 0,
+            "max": 100,
+            "visualize": true
+        }
+    },
+    {
+        "id": "location",
+        "type": "latlong",
+        "title": "Base",
+        "editable": true
+    },
+    {
         "id": "assignedUsers",
         "type": "users",
         "title": "Assigned Users",
-        "editable": true
+        "editable": true,
+        "opts": {
+            "maxUsers": 2
+        }
     }
 ]
