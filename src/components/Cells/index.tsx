@@ -9,36 +9,20 @@ import {iCell} from './interfaces';
 
 // Umbrella cell for determining what cell type we actually render
 export function Cell(props: iCell) {
-  let renderedValue;
+  const cellTypes : Record<string, any> = {
+    number: NumberCell,
+    uri: UriCell,
+    checkbox: CheckboxCell,
+    users: UsersCell,
+    string: StringCell,
+    latlong: LatLongCell
+  };
 
-  // I think the switch statement is undervalued: it's more elegant than "if (x === y) ... else if (x === z)..." and every so often
-  // having a switch fallthrough actually is the thing you want; it always gives me a small jolt of joy when I get to use that correctly.
-  // For extensibility, add new cell types here.
-  switch (props.type) {
-    case 'number':
-      renderedValue = <NumberCell {...props} />;
-      break;
-    case 'uri':
-      renderedValue = <UriCell {...props} />;
-      break;
-    case 'checkbox':
-      renderedValue = <CheckboxCell {...props} />;
-      break;
-    case 'users':
-      renderedValue = <UsersCell {...props} />;
-      break;
-    case 'latlong':
-      renderedValue = <LatLongCell {...props} />;
-      break;
-    case 'string':
-    default:
-      renderedValue = <StringCell {...props} />;
-      break;
-  }
+  const CellComponent = cellTypes[props.type] || StringCell;
 
   return (
     <TableCell className="cell">
-      {renderedValue}
+      <CellComponent {...props} />
     </TableCell>
   )
 }

@@ -2,6 +2,7 @@ import {Edit} from "@mui/icons-material";
 import {IconButton, Tooltip} from "@mui/material";
 import {iEditButton} from "./interfaces";
 
+// This is about as simple as a component gets
 export function EditButton(props : iEditButton) {
   return (
     <>

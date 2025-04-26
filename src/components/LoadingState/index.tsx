@@ -1,6 +1,7 @@
 import spinner from '../../assets/spinner.svg';
 import './index.css';
 
+// A simple loading indicator, used while fetching data before displaying the grid
 export function LoadingState() {
   return (
     <div className="loading-state">

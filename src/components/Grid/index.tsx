@@ -7,7 +7,6 @@ import {iGrid} from './interfaces'
 // sorting, filtering, and resizing).
 export function Grid(props: iGrid) {
   
-  // One minor flaw in this is that it will get messed up if one of the column names included in the data definiton is "__select__"
   return (
     <>
       <TableContainer component={Paper} className="grid-table-container">
