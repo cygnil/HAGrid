@@ -29,7 +29,15 @@ export function Grid(props: iGrid) {
                   <TableRow key={rowData.id}>
                       {
                       props.definition.map((colData) => {
-                        return <Cell key={colData.id + rowData.id} dataId={rowData.id} value={rowData[colData.id]} columnId={colData.id} type={colData.type} editable={colData.editable} opts={colData.opts || {}} />
+                        return <Cell
+                          key={colData.id + rowData.id}
+                          dataId={rowData.id}
+                          value={rowData[colData.id]}
+                          columnId={colData.id}
+                          type={colData.type}
+                          editable={colData.editable}
+                          opts={colData.opts || {}}
+                        />
                       })
                     }
                   </TableRow>

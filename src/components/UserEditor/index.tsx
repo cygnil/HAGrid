@@ -20,22 +20,17 @@ export function UserEditor(props: iUserEditor) {
         setUserFilter(newValue);
     };
 
-    const handleAddUser = async (userId: string) => {
+    const handleChangeUser = async (userId: string, action: string) => {
         const oldValue = selectedUsers;
-        const newValue = [...selectedUsers, userId]
-        setIsUpdating(true);
-        setSelectedUsers(newValue);
-        const success = await onUpdate(newValue);
-        onUpdateFinished(success, newValue);
-        if (!success) {
-            setSelectedUsers(oldValue);
-        }
-        setIsUpdating(false);
-    }
 
-    const handleRemoveUser = async (userId: string) => {
-        const oldValue = selectedUsers;
-        const newValue = selectedUsers.filter((id: string) => id !== userId)
+        let newValue = selectedUsers;
+        if (action === "add")
+            newValue = [...selectedUsers, userId]
+        else if (action === "remove")
+            newValue = selectedUsers.filter((id: string) => id !== userId)
+        else
+            return
+
         setIsUpdating(true);
         setSelectedUsers(newValue);
         const success = await onUpdate(newValue);
@@ -61,7 +56,7 @@ export function UserEditor(props: iUserEditor) {
                         const user = userMap.get(userId) || {userId: '', name: '', avatarUri: ''};
                         const matchesFilter = filterRegex.test(user.name);
                         return (
-                            <span key={user.userId} className={`user-editor-user ${userFilter.length > 0 && !matchesFilter && "no-match"}`} onClick={handleRemoveUser.bind(null, user.userId)}>
+                            <span key={user.userId} className={`user-editor-user ${userFilter.length > 0 && !matchesFilter && "no-match"}`} onClick={handleChangeUser.bind(null, user.userId, "remove")}>
                                 <Tooltip title={user.name + " - Click to remove"}>
                                     <Avatar src={user.avatarUri} alt={user.name} data-tooltip-id={"tt-" + user.userId} data-tooltip-content={user.name} sx={{width: 32, height: 32}} />
                                 </Tooltip>
@@ -87,7 +82,7 @@ export function UserEditor(props: iUserEditor) {
                         .sort((a, b) => sorter(a.name, b.name))
                         .map((user: iUser) => {
                             return (
-                                <ListItem key={user.userId} className="user-editor-user" onClick={handleAddUser.bind(null, user.userId)}>
+                                <ListItem key={user.userId} className="user-editor-user" onClick={handleChangeUser.bind(null, user.userId, "add")}>
                                     <User {...user} />
                                 </ListItem>
                             );

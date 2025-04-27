@@ -30,12 +30,19 @@ function App() {
     const fetchData = async () => {
       if (!fetchingData) {
         fetchingData = true;
-        const response = await fetch(serverBaseUri + "/data", {method: "POST", headers: {"Content-Type": "application/json"}});
-        if (!response.ok) {
-          setAlerts(alerts.concat({severity: "error", message: "Network response was not ok when fetching data"}));
-        } else {
-          const json: iDataRow[] = await response.json()
-          setData(json);
+        try {
+          const response = await fetch(serverBaseUri + "/data", {method: "POST", headers: {"Content-Type": "application/json"}});
+          if (!response.ok) {
+            setAlerts(alerts.concat([{severity: "error", message: "Network response was not ok when fetching data"}]));
+          } else {
+            const json: iDataRow[] = await response.json()
+            setData(json);
+          }
+        } catch (error) {
+          // This will usually happen if the server can't be contacted, but we can't guarantee that and the error message is often not very helpful
+          let message = String(error);
+          if (error instanceof Error) message = error.message
+          setAlerts(alerts.concat([{severity: "error", message: "Error fetching data: " + message}]));
         }
         fetchingData = false;
       }
@@ -44,19 +51,25 @@ function App() {
     const fetchUsers = async () => {
       if (!fetchingUsers) {
         fetchingUsers = true;
-        const response = await fetch(serverBaseUri + "/users", {method: "POST", headers: {"Content-Type": "application/json"}});
-        if (!response.ok) {
-          setAlerts(alerts.concat({severity: "error", message: "Network response was not ok when fetching users"}));
-        } else {
-          const json: iUser[] = await response.json()
-          setUsers(json);
+        try {
+          const response = await fetch(serverBaseUri + "/users", {method: "POST", headers: {"Content-Type": "application/json"}});
+          if (!response.ok) {
+            setAlerts(alerts.concat([{severity: "error", message: "Network response was not ok when fetching users"}]));
+          } else {
+            const json: iUser[] = await response.json()
+            setUsers(json);
 
-          // When data is loaded, assign each user to a map for easy lookup based on user ID--much better than iterating through arrays! Share this through a context
-          const newUserMap = new Map<string, iUser>();
-          json.forEach((user: iUser) => {
-              newUserMap.set(user.userId, user);
-          });
-          setUserMap(newUserMap);
+            // When data is loaded, assign each user to a map for easy lookup based on user ID--much better than iterating through arrays! Share this through a context
+            const newUserMap = new Map<string, iUser>();
+            json.forEach((user: iUser) => {
+                newUserMap.set(user.userId, user);
+            });
+            setUserMap(newUserMap);
+          }
+        } catch (error) {
+          let message = String(error);
+          if (error instanceof Error) message = error.message
+          setAlerts(alerts.concat([{severity: "error", message: "Error fetching users: " + message}]));
         }
         fetchingUsers = false;
       }

@@ -41,7 +41,8 @@ export function LatLongCell(props: iLatLongCell) {
       {isEditing && editor}
       {!isEditing &&
         <span className={`latlong-cell ${props.editable && "editable"}`}>
-          <a href={`https://google.com/maps/place/${value}`} target="_blank">{value}</a> {props.editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
+          <a href={`https://google.com/maps/place/${value}`} target="_blank">{value}</a>
+          {props.editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
         </span>}
     </>
   )

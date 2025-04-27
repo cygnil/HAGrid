@@ -19,6 +19,7 @@ export function NumberCell(props: iNumberCell) {
     if (success) {setValue(value);}
     setIsEditing(false);
   }
+
   const validate = (val: string) => {
     if (!/^-?\d*(\.\d*)?$/.test(val))
       return {isValid: false, message: "Does not appear to be a number!"};
@@ -45,7 +46,7 @@ export function NumberCell(props: iNumberCell) {
           {value} 
           {min !== undefined && max !== undefined && visualize && <LinearProgress className="num-graph" variant="determinate" value={(value - min) * 100 / (max - min)} />}
           {props.editable && <EditButton onClick={() => {setIsEditing(!isEditing)}} />}
-          </span>
+        </span>
       }
     </>
   )
