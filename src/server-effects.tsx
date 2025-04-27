@@ -1,4 +1,3 @@
-import config from "./config.json";
 import {iAlertsContext} from "./components/App/interfaces";
 
 export function onUpdateFactory(field: string, dataId: number, alerts: iAlertsContext["alerts"], setAlerts: iAlertsContext["setAlerts"]) {
@@ -7,7 +6,7 @@ export function onUpdateFactory(field: string, dataId: number, alerts: iAlertsCo
   // I also don't like the hack of passing in the alerts context here, that's one of the things I would change first if I had more time with
   // this application.
   const onUpdate = async (val: string[]) => {
-    const baseServerUri = config.server.protocol + "://" + config.server.host + (config.server.port ? ":" + config.server.port : "");
+    const baseServerUri = import.meta.env.VITE_SERVER_PROTO + "://" + import.meta.env.VITE_SERVER_HOST + (import.meta.env.VITE_SERVER_PORT ? ":" + import.meta.env.VITE_SERVER_PORT : "");
     const updateData = async () => {
       const response = await fetch(baseServerUri + "/update", {
         method: 'POST',

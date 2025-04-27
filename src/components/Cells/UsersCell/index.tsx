@@ -25,7 +25,7 @@ export function UsersCell(props: iUsersCell) {
 
     const userElements = [];
     for (let i = 0; i < Math.min(value.length, maxUsers); i++) {
-      userElements.push(<User {...(userMap.get(value[i]) || nullUser)} />);
+      userElements.push(<User key={i} {...(userMap.get(value[i]) || nullUser)} />);
     }
 
     const LightTooltip = styled(({className, ...props}: TooltipProps) => (

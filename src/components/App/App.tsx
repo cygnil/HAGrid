@@ -6,7 +6,6 @@ import './App.css'
 import {iAlertsContext, iDataRow, iDataContext, iUser, iUsersContext, iUserMapContext} from './interfaces';
 import {iAlert} from '../AlertContainer/interfaces';
 import gridDefinition from '../../assets/gridDefinition.json';
-import config from '../../config.json';
 
 export const DataContext = React.createContext<iDataContext>({data: [], setData: () => {return}});
 export const UsersContext = React.createContext<iUsersContext>({users: [], setUsers: () => {return}});
@@ -26,7 +25,7 @@ function App() {
 
   // Effect right off the bat to simultaneously fetch data and users from the server
   useEffect(() => {
-    const serverBaseUri = config.server.protocol + "://" + config.server.host + (config.server.port ? ":" + config.server.port : "");
+    const serverBaseUri = import.meta.env.VITE_SERVER_PROTO + "://" + import.meta.env.VITE_SERVER_HOST + (import.meta.env.VITE_SERVER_PORT ? ":" + import.meta.env.VITE_SERVER_PORT : "");
 
     const fetchData = async () => {
       if (!fetchingData) {
