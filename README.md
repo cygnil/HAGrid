@@ -22,6 +22,12 @@ Finally, components should be memoized where necessary and the table should be a
 
 * We assume no hardening against CSS, injection, or any other type of attack, either on the front- or back-end
 
+# Quickstart
+
+You can view an implementation of this (although without persistent edits across page refreshes) at [https://ha-grid.vercel.app/](https://ha-grid.vercel.app/)
+
+You can view the Storybook of this project at [https://ha-grid-storybook.vercel.app/](https://ha-grid-storybook.vercel.app/)
+
 # Installation
 
 You'll need to install both the front-end and back-end components, i.e.
